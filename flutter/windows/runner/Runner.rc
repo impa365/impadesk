@@ -94,7 +94,7 @@ BEGIN
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "impadesk" "\0"
             VALUE "LegalCopyright", "Copyright © 2026 IMPA 365. All rights reserved." "\0"
-            VALUE "OriginalFilename", "rustdesk.exe" "\0"
+            VALUE "OriginalFilename", "ImpaDesk.exe" "\0"
             VALUE "ProductName", "ImpaDesk" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END

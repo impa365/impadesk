@@ -95,10 +95,25 @@ jobs:
         run: |
           python .\build.py --portable --flutter --skip-portable-pack --hwcodec
           move .\flutter\build\windows\x64\runner\Release .\impadesk
+          # The portable packer derives the extraction folder from the payload
+          # executable's name, so rename before packing to keep it "impadesk".
+          Rename-Item -Path .\impadesk\rustdesk.exe -NewName ImpaDesk.exe
+
+      - name: Build single-file installer
+        shell: pwsh
+        run: |
+          python -m pip install -r .\libs\portable\requirements.txt
+          cd .\libs\portable
+          python .\generate.py -f "..\..\impadesk" -o . -e "..\..\impadesk\ImpaDesk.exe"
+          cargo build --locked --release
+          Copy-Item .\target\release\rustdesk-portable-packer.exe "..\..\ImpaDesk-install.exe" -Force
+          Get-Item "..\..\ImpaDesk-install.exe" | Format-List Name,Length
 
       - name: Upload ImpaDesk artifact
         uses: actions/upload-artifact@v4
         with:
           name: ImpaDesk-windows-x64
-          path: impadesk
+          path: |
+            ImpaDesk-install.exe
+            impadesk
           retention-days: 30

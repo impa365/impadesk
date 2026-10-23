@@ -60,3 +60,7 @@ flutter/web/
 /third_party/libdrmtap/
 # Local git worktrees
 .worktrees/
+# Local build output (downloaded CI artifacts, staging, helper scripts)
+/dist/
+/release/
+/_ssh.py
